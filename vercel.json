@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "src": "^/(?:database\\.json|package(?:-lock)?\\.json|vercel\\.json|LEIA-ME.*|.*\\.sql$|.*\\.json$|.*\\.env.*|data(?:/.*)?|\\.git(?:/.*)?|node_modules(?:/.*)?|(?:server|db|auth|supabaseClient|supabaseDb|tracking-server|recruitment-server|test_security)\\.js)$",
+      "status": 404
+    },
+    {
+      "src": "^/assets/(?:.*\\.(?:json|sql|env|txt|md|bak|js|log|old|orig))$",
+      "status": 404
+    },
+    {
+      "src": "/(.*)",
+      "dest": "server.js"
+    }
+  ]
+}
